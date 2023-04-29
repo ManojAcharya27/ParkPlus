@@ -33,7 +33,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     }
 
     @Override
-    public SpotResponseDto addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
+    public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
         SpotResponseDto spotResponseDto = new SpotResponseDto();
         spotResponseDto.setOccupied(false);
         spotResponseDto.setNumberOfWheels(numberOfWheels);
@@ -57,7 +57,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         spotResponseDto.setParkingLotResponseDto(parkingLotResponseDto);
 
         //spotRepository1.save(spot);
-        return spotResponseDto;
+        return spot;
 
     }
 
