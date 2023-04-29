@@ -1,6 +1,8 @@
 package com.driver.services.impl;
 
 
+import com.driver.Dto.ParkingLotResponseDto;
+import com.driver.Dto.SpotResponseDto;
 import com.driver.model.ParkingLot;
 import com.driver.model.Spot;
 
@@ -31,26 +33,31 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     }
 
     @Override
-    public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
+    public SpotResponseDto addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
+        SpotResponseDto spotResponseDto = new SpotResponseDto();
+        spotResponseDto.setOccupied(false);
+        spotResponseDto.setNumberOfWheels(numberOfWheels);
+        spotResponseDto.setPricePerHour(pricePerHour);
+
+        ParkingLotResponseDto parkingLotResponseDto = new ParkingLotResponseDto();
+
+        Spot spot = new Spot();
+        spot.setOccupied(spotResponseDto.getOccupied());
+        spot.setNumberOfWheels(spotResponseDto.getNumberOfWheels());
+        spot.setPricePerHour(spotResponseDto.getPricePerHour());
+
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
-        Spot spot = new Spot(pricePerHour);
-
-        if(numberOfWheels>4)
-            spot.setSpotType(SpotType.OTHERS);
-        else if(numberOfWheels>2)
-            spot.setSpotType(SpotType.FOUR_WHEELER);
-        else
-            spot.setSpotType(SpotType.TWO_WHEELER);
-
-        spot.setOccupied(false);
-        spot.setParkingLot(parkingLot);
-
         parkingLot.getSpotList().add(spot);
 
+        spot.setParkingLot(parkingLot);
         parkingLotRepository1.save(parkingLot);
-        // spotRepository1.save(spot);
 
-        return spot;
+        parkingLotResponseDto.setName(parkingLot.getName());
+        parkingLotResponseDto.setAddress(parkingLot.getAddress());
+        spotResponseDto.setParkingLotResponseDto(parkingLotResponseDto);
+
+        //spotRepository1.save(spot);
+        return spotResponseDto;
 
     }
 

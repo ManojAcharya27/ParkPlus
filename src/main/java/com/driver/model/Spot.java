@@ -94,4 +94,7 @@ public class Spot {
     public void setReservationList(List<Reservation> reservationList) {
         this.reservationList = reservationList;
     }
+
+    public void setNumberOfWheels(int numberOfWheels) {
+    }
 }
