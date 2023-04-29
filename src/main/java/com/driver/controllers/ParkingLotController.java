@@ -1,15 +1,13 @@
 package com.driver.controllers;
 
-import com.driver.Entity.ParkingLot;
-import com.driver.Entity.Spot;
-import com.driver.services.ParkingLotService;
+import com.driver.model.ParkingLot;
+import com.driver.model.Spot;
+
 import com.driver.services.impl.ParkingLotServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.driver.model.*;
 
 @RestController
 @RequestMapping("/parking-lots")
@@ -23,7 +21,7 @@ public class ParkingLotController {
     @PostMapping("/add")
     public ResponseEntity<ParkingLot> addParkingLot(@RequestParam String name, @RequestParam String address) {
         //add a new parking lot to the database
-        ParkingLot newParkingLot = parkingLotService.addParkingLot(name,address);
+        ParkingLot newParkingLot= parkingLotService.addParkingLot(name,address);
         return new ResponseEntity<>(newParkingLot, HttpStatus.CREATED);
     }
 

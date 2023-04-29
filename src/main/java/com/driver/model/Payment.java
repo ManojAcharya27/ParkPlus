@@ -1,6 +1,5 @@
-package com.driver.Entity;
+package com.driver.model;
 
-import com.driver.model.PaymentMode;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;

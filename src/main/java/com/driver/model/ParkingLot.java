@@ -1,9 +1,12 @@
-package com.driver.Entity;
+package com.driver.model;
 
-import org.springframework.boot.test.autoconfigure.data.cassandra.DataCassandraTest;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +16,7 @@ public class ParkingLot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
-
     private String address;
 
     @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL)
@@ -29,6 +30,17 @@ public class ParkingLot {
         this.name = name;
         this.address = address;
         this.spotList = spotList;
+    }
+
+    public ParkingLot(int id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    public ParkingLot(String name, String address) {
+        this.name = name;
+        this.address = address;
     }
 
     public int getId() {
